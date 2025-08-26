@@ -1,0 +1,861 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Products - BTK CURATORS</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Global Styles */
+        :root {
+            --primary: #333333; /* Dark charcoal for text */
+            --secondary: #E91E63; /* Main pink accent */
+            --accent: #F48FB1; /* Lighter pink */
+            --light: #fdf6f8; /* Very light pink for backgrounds */
+            --dark: #333333; /* Same as primary */
+            --success: #27ae60;
+            --header-height: 70px; /* Define header height as a variable */
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        body {
+            color: #333;
+            line-height: 1.6;
+            background-color: #ffffff;
+            overflow-x: hidden;
+        }
+
+        body.no-scroll {
+            overflow: hidden;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 12px 25px;
+            background-color: var(--secondary);
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: 0.5s;
+        }
+        
+        .btn:hover::before {
+            left: 100%;
+        }
+        
+        .btn:hover {
+            background-color: #c2185b; /* Darker Pink */
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+        
+        .btn:active {
+            transform: translateY(-1px);
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+        }
+        
+        .btn-store {
+            background-color: var(--success);
+        }
+        
+        .btn-store:hover {
+            background-color: #219653;
+        }
+        
+        .section {
+            padding: 80px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+            color: var(--primary);
+        }
+        
+        .section-title h2 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background-color: var(--secondary);
+        }
+        
+        .section-title p {
+            font-size: 1.1rem;
+            color: #777;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        /* Header Styles */
+        header {
+            background-color: white;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.07);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            height: var(--header-height);
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 100%;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo span {
+            color: var(--secondary);
+        }
+        
+        .logo i {
+            margin-right: 10px;
+            font-size: 2rem;
+            color: var(--secondary);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            align-items: center;
+        }
+        
+        nav ul li {
+            margin-left: 25px;
+            position: relative;
+        }
+        
+        nav ul li a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+        
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--secondary);
+            transition: width 0.3s ease;
+        }
+        
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+        
+        nav ul li a:hover,
+        nav ul li a.active-link { /* Style for the active page link */
+            color: var(--secondary);
+        }
+
+        nav ul li a.active-link::after { /* Underline for the active page link */
+            width: 100%;
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--primary);
+            z-index: 1001;
+        }
+
+        .body-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 998;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.4s ease, visibility 0.4s ease;
+        }
+
+        .body-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        /* ===== PRODUCTS PAGE SPECIFIC STYLES ===== */
+
+        .page-header {
+            background-color: var(--light);
+            padding: 60px 0;
+            text-align: center;
+        }
+        .page-header h1 {
+            font-size: 2.8rem;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+        .page-header p {
+            font-size: 1.1rem;
+            color: #777;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .product-category {
+            padding: 60px 0;
+            border-bottom: 1px solid #eee;
+        }
+        .product-category:last-child {
+            border-bottom: none;
+        }
+        
+        .product-category-title {
+            margin-bottom: 40px;
+        }
+        .product-category-title h2 {
+            font-size: 2.2rem;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+        .product-category-title p {
+            font-size: 1.1rem;
+            color: #777;
+            max-width: 800px;
+        }
+        
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .product-card {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.05);
+            overflow: hidden;
+            transition: all 0.4s ease;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+        }
+        
+        .product-image {
+            position: relative;
+            height: 250px;
+        }
+        
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+        
+        .product-card:hover .product-image img {
+            transform: scale(1.08);
+        }
+        
+        .product-info {
+            padding: 25px;
+        }
+        
+        .product-info h3 {
+            font-size: 1.25rem;
+            margin-bottom: 10px;
+            color: var(--primary);
+        }
+        
+        .product-info p {
+            font-size: 0.95rem;
+            color: #666;
+            margin-bottom: 20px;
+        }
+        
+        .product-price {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--secondary);
+            margin-bottom: 20px;
+        }
+        
+        .product-info .btn {
+            width: 100%;
+            text-align: center;
+        }
+        
+        .cta {
+            background: linear-gradient(to right, var(--primary), #111111);
+            color: white;
+            text-align: center;
+            padding: 80px 0;
+        }
+        .cta h2 {
+            margin-bottom: 20px;
+            font-size: 2.2rem;
+        }
+        .cta p {
+            max-width: 700px;
+            margin: 0 auto 30px;
+            font-size: 1.1rem;
+        }
+
+        /* ===== END OF PRODUCTS PAGE SPECIFIC STYLES ===== */
+        
+        /* Footer */
+        footer {
+            background: linear-gradient(to bottom, #333333, #1a1a1a);
+            color: white;
+            padding: 60px 0 30px;
+            position: relative;
+        }
+        
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .footer-column h3 {
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background-color: var(--secondary);
+        }
+        
+        .footer-column ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .footer-column ul li i {
+            margin-right: 10px;
+            color: var(--secondary);
+        }
+        
+        .footer-column ul li a {
+            color: #ccc;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+        }
+        
+        .footer-column ul li a i {
+            margin-right: 10px;
+            color: var(--secondary);
+        }
+        
+        .footer-column ul li a:hover {
+            color: var(--secondary);
+            transform: translateX(5px);
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .social-links a:hover {
+            background-color: var(--secondary);
+            transform: translateY(-5px) rotate(5deg);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #ccc;
+            font-size: 0.9rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            nav {
+                position: fixed;
+                top: var(--header-height);
+                left: -100%;
+                width: 80%;
+                max-width: 320px;
+                height: calc(100vh - var(--header-height));
+                background-color: white;
+                transition: left 0.4s ease;
+                box-shadow: 5px 0 15px rgba(0, 0, 0, 0.1);
+                z-index: 999;
+                overflow-y: auto;
+            }
+            
+            nav.active {
+                left: 0;
+            }
+            
+            nav ul {
+                flex-direction: column;
+                padding: 30px;
+                align-items: flex-start;
+            }
+            
+            nav ul li {
+                margin: 0 0 20px 0;
+                width: 100%;
+            }
+
+            .section, .product-category, .cta {
+                padding: 60px 0;
+            }
+            
+            .section-title h2, .page-header h1, .product-category-title h2 {
+                font-size: 2rem;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .logo {
+                font-size: 1.5rem;
+            }
+            .product-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container header-container">
+            <a href="index.html" class="logo">
+                <i class="fas fa-home"></i>
+                BTK <span>CURATORS</span>
+            </a>
+            <div class="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="product.html" class="active-link">Products</a></li>
+                    <li><a href="index.html#features">Why Choose Us</a></li>
+                    <li><a href="index.html#testimonials">Testimonials</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="index.html#contact-form" class="btn btn-store">Visit Store</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    
+    <div class="body-overlay"></div>
+
+    <main>
+        <section class="page-header">
+            <div class="container">
+                <h1>Our Curated Collections</h1>
+                <p>Explore our wide range of premium products designed to elevate every corner of your home.</p>
+            </div>
+        </section>
+
+        <section id="tiles" class="product-category">
+            <div class="container">
+                <div class="product-category-title">
+                    <h2>Designer Tiles</h2>
+                    <p>From sleek modern designs to timeless classics, our tiles provide the perfect foundation for any room.</p>
+                </div>
+                <div class="product-grid">
+                    <div class="product-card">
+                        <div class="product-image">
+                            <img src="https://static.3d-baza.com/models/376332/46e9b569d40f4c73b8a64870.jpg" alt="Marble Finish Porcelain Tile">
+                        </div>
+                        <div class="product-info">
+                            <h3>Marble Finish Porcelain</h3>
+                            <p>Elegant and durable porcelain tiles with a stunning polished marble effect. Ideal for floors and walls.</p>
+                            <div class="product-price">₹150 / sq. ft.</div>
+                            <a href="index.html#contact-form" class="btn">Enquire Now</a>
+                        </div>
+                    </div>
+                    <div class="product-card">
+                        <div class="product-image">
+                            <img src="https://img.lovepik.com/photo/50100/4098.jpg_wh860.jpg" alt="Textured Wall Tile">
+                        </div>
+                        <div class="product-info">
+                            <h3>3D Textured Wall Tiles</h3>
+                            <p>Add depth and character to your walls with these contemporary 3D textured ceramic tiles.</p>
+                            <div class="product-price">₹120 / sq. ft.</div>
+                            <a href="index.html#contact-form" class="btn">Enquire Now</a>
+                        </div>
+                    </div>
+                    <div class="product-card">
+                        <div class="product-image">
+                            <img src="https://c8.alamy.com/comp/2HNMYKP/rustic-wooden-plank-background-2HNMYKP.jpg" alt="Rustic Wooden Plank Tile">
+                        </div>
+                        <div class="product-info">
+                            <h3>Rustic Wooden Plank</h3>
+                            <p>Get the warm, inviting look of wood with the durability and ease of maintenance of vitrified tiles.</p>
+                            <div class="product-price">₹135 / sq. ft.</div>
+                            <a href="index.html#contact-form" class="btn">Enquire Now</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="bathware" class="product-category" style="background-color: var(--light);">
+            <div class="container">
+                <div class="product-category-title">
+                    <h2>Bathroom Sets & Ware</h2>
+                    <p>Transform your bathroom into a sanctuary with our complete sets of stylish and functional fixtures.</p>
+                </div>
+                <div class="product-grid">
+                    <div class="product-card">
+                        <div class="product-image">
+                            <img src="https://cdna.artstation.com/p/marketplace/presentation_assets/003/264/278/large/file.jpg?1701968432" alt="Modern Bathroom Vanity Set">
+                        </div>
+                        <div class="product-info">
+                            <h3>Modern Vanity Set</h3>
+                            <p>A complete set including a sleek basin, minimalist tap, and a floating vanity for a clean, modern look.</p>
+                            <div class="product-price">₹25,000</div>
+                            <a href="index.html#contact-form" class="btn">Enquire Now</a>
+                        </div>
+                    </div>
+                    <div class="product-card">
+                        <div class="product-image">
+                            <img src="https://tse2.mm.bing.net/th/id/OIP.Dc3GLCWwbeA2XRMdDvYpjAHaHa?cb=thfvnext&rs=1&pid=ImgDetMain&o=7&rm=3" alt="Luxury Shower System">
+                        </div>
+                        <div class="product-info">
+                            <h3>Luxury Shower System</h3>
+                            <p>Experience the ultimate relaxation with our multi-function shower system with a rainfall head.</p>
+                            <div class="product-price">₹18,500</div>
+                            <a href="index.html#contact-form" class="btn">Enquire Now</a>
+                        </div>
+                    </div>
+                    <div class="product-card">
+                        <div class="product-image">
+                            <img src="https://mir-s3-cdn-cf.behance.net/project_modules/disp/3da87b98841851.5ee54f570d6df.jpg" alt="Classic Ceramic Suite">
+                        </div>
+                        <div class="product-info">
+                            <h3>Classic Ceramic Suite</h3>
+                            <p>A timeless one-piece toilet and pedestal basin set that complements any traditional bathroom design.</p>
+                            <div class="product-price">₹15,000</div>
+                            <a href="index.html#contact-form" class="btn">Enquire Now</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="kitchen" class="product-category">
+            <div class="container">
+                <div class="product-category-title">
+                    <h2>Kitchen Sets & Sinks</h2>
+                    <p>Functional, durable, and beautifully designed sinks and fixtures to complete your dream kitchen.</p>
+                </div>
+                <div class="product-grid">
+                    <div class="product-card">
+                        <div class="product-image">
+                            <img src="https://images5.alphacoders.com/872/thumbbig-872918.webp" alt="Stainless Steel Kitchen Sink">
+                        </div>
+                        <div class="product-info">
+                            <h3>Double Bowl Steel Sink</h3>
+                            <p>Heavy-gauge stainless steel sink with a satin finish, perfect for multitasking in a busy kitchen.</p>
+                            <div class="product-price">₹9,500</div>
+                            <a href="index.html#contact-form" class="btn">Enquire Now</a>
+                        </div>
+                    </div>
+                    <div class="product-card">
+                        <div class="product-image">
+                            <img src="https://tse4.mm.bing.net/th/id/OIP.noiSyVdH5mhxpqm3P0IDnwHaHa?cb=thfvnext&rs=1&pid=ImgDetMain&o=7&rm=3" alt="Pull-out Kitchen Faucet">
+                        </div>
+                        <div class="product-info">
+                            <h3>Pull-Out Mixer Faucet</h3>
+                            <p>A versatile and stylish faucet with a pull-out spray head, making cleaning and food prep a breeze.</p>
+                            <div class="product-price">₹7,200</div>
+                            <a href="index.html#contact-form" class="btn">Enquire Now</a>
+                        </div>
+                    </div>
+                            <div class="product-card">
+                                <div class="product-image">
+                                    <img src="https://th.bing.com/th/id/R.1c65d29abb00f12ca192656945199ba0?rik=%2bv0%2f8T1x3jSAOg&riu=http%3a%2f%2f5.imimg.com%2fdata5%2fSELLER%2fDefault%2f2023%2f10%2f354950373%2fVX%2fJV%2fQU%2f23442984%2fmodular-kitchen-1000x1000.jpg&ehk=WmWxYD7xLmMrJOyxxr3tZUpvJI1tbhRSYcat0BCIzR0%3d&risl=&pid=ImgRaw&r=0" alt="Modular Kitchen Unit">
+                                </div>
+                                <div class="product-info">
+                                    <h3>Modular Cabinet Unit</h3>
+                                    <p>High-gloss, scratch-resistant modular units to organize your kitchen with style and efficiency.</p>
+                                    <div class="product-price">₹32,000 onwards</div>
+                                    <a href="index.html#contact-form" class="btn">Book Consultation</a>
+                                </div>
+                            </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="decor" class="product-category">
+            <div class="container">
+                <div class="product-category-title">
+                    <h2>Exquisite Home Décor</h2>
+                    <p>Add the perfect finishing touches to your space with our curated collection of decorative items.</p>
+                </div>
+                <div class="product-grid">
+                    <div class="product-card">
+                        <div class="product-image">
+                            <img src="https://thfvnext.bing.com/th/id/OIP.6GO7IhL-u12iMb7lC8DKNAHaE7?w=234&h=180&c=7&r=0&o=7&cb=thfvnext&dpr=1.3&pid=1.7&rm=3" alt="Modern Ceramic Vase">
+                        </div>
+                        <div class="product-info">
+                            <h3>Modern Ceramic Vase</h3>
+                            <p>A beautifully crafted minimalist vase, perfect for adding a touch of elegance to any tabletop or shelf.</p>
+                            <div class="product-price">₹4,500</div>
+                            <a href="index.html#contact-form" class="btn">Enquire Now</a>
+                        </div>
+                    </div>
+                    <div class="product-card">
+                        <div class="product-image">
+                            <img src="https://thfvnext.bing.com/th/id/OIP.x35K3aPXc_BFdjDiYxL7BwHaEJ?w=295&h=180&c=7&r=0&o=7&cb=thfvnext&dpr=1.3&pid=1.7&rm=3" alt="Abstract Canvas Art">
+                        </div>
+                        <div class="product-info">
+                            <h3>Abstract Canvas Art</h3>
+                            <p>A vibrant, hand-painted abstract piece that serves as a stunning focal point for your living room or bedroom.</p>
+                            <div class="product-price">₹12,800</div>
+                            <a href="index.html#contact-form" class="btn">Enquire Now</a>
+                        </div>
+                    </div>
+                    <div class="product-card">
+                        <div class="product-image">
+                            <img src="https://tse4.mm.bing.net/th/id/OIP.-mde8KEz5GUTGw6bg43jewHaEm?cb=thfvnext&rs=1&pid=ImgDetMain&o=7&rm=3" alt="Luxury Velvet Cushions">
+                        </div>
+                        <div class="product-info">
+                            <h3>Luxury Velvet Cushions</h3>
+                            <p>A set of two plush velvet cushions in rich jewel tones to add comfort, texture, and a pop of color to your sofa.</p>
+                            <div class="product-price">₹3,200 (Set of 2)</div>
+                            <a href="index.html#contact-form" class="btn">Enquire Now</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="lighting" class="product-category" style="background-color: var(--light);">
+            <div class="container">
+                <div class="product-category-title">
+                    <h2>Lighting Solutions</h2>
+                    <p>Illuminate your home with our stylish and efficient lighting fixtures, from statement chandeliers to subtle mood lighting.</p>
+                </div>
+                <div class="product-grid">
+                    <div class="product-card">
+                        <div class="product-image">
+                            <img src="https://radientdecorlab.com/wp-content/uploads/2024/10/industrial-pendant-lamps-1024x585.jpg" alt="Industrial Pendant Lamp">
+                        </div>
+                        <div class="product-info">
+                            <h3>Industrial Pendant Lamp</h3>
+                            <p>A matte black metal pendant light that's perfect for hanging over a kitchen island or dining table.</p>
+                            <div class="product-price">₹6,800</div>
+                            <a href="index.html#contact-form" class="btn">Enquire Now</a>
+                        </div>
+                    </div>
+                    <div class="product-card">
+                        <div class="product-image">
+                            <img src="https://thfvnext.bing.com/th/id/OIP.iThWLCvp1rpZg2N4WUZL8wHaHa?w=199&h=199&c=7&r=0&o=7&cb=thfvnext&dpr=1.3&pid=1.7&rm=3" alt="Tripod Floor Lamp">
+                        </div>
+                        <div class="product-info">
+                            <h3>Tripod Floor Lamp</h3>
+                            <p>A contemporary wooden tripod floor lamp with a fabric shade, adding warm, diffused light to any corner.</p>
+                            <div class="product-price">₹8,900</div>
+                            <a href="index.html#contact-form" class="btn">Enquire Now</a>
+                        </div>
+                    </div>
+                    <div class="product-card">
+                        <div class="product-image">
+                            <img src="https://m.media-amazon.com/images/I/812nX7k5QbL._AC_SL1500_.jpg" alt="Modern Wall Sconce">
+                        </div>
+                        <div class="product-info">
+                            <h3>Modern Wall Sconce</h3>
+                            <p>Sleek and minimalist wall sconces that provide elegant accent lighting for hallways, bedrooms, or bathrooms.</p>
+                            <div class="product-price">₹5,500 (Set of 2)</div>
+                            <a href="index.html#contact-form" class="btn">Enquire Now</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section cta">
+            <div class="container">
+                <h2>Ready to Start Your Project?</h2>
+                <p>Visit our showroom in Gorakhpur to see our products in person or book a free design consultation with our experts today!</p>
+                <a href="index.html#contact-form" class="btn">Get In Touch</a>
+            </div>
+        </section>
+    </main>
+    
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-column">
+                    <h3>BTK CURATORS</h3>
+                    <p>Your one-stop shop for all home improvement needs. Quality products at affordable prices with expert service.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-pinterest"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Products</h3>
+                    <ul>
+                        <li><a href="#tiles"><i class="fas fa-chevron-right"></i> Designer Tiles</a></li>
+                        <li><a href="#bathware"><i class="fas fa-chevron-right"></i> Bathroom Sets</a></li>
+                        <li><a href="#kitchen"><i class="fas fa-chevron-right"></i> Kitchen Sets</a></li>
+                        <li><a href="#decor"><i class="fas fa-chevron-right"></i> Home Décor</a></li>
+                        <li><a href="#lighting"><i class="fas fa-chevron-right"></i> Lighting Solutions</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="about.html"><i class="fas fa-chevron-right"></i> About Us</a></li>
+                        <li><a href="product.html"><i class="fas fa-chevron-right"></i> Products</a></li>
+                        <li><a href="contact.html"><i class="fas fa-chevron-right"></i> Contact Us</a></li>
+                        <li><a href="index.html#testimonials"><i class="fas fa-chevron-right"></i> Testimonials</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contact Info</h3>
+                    <ul>
+                        <li><i class="fas fa-map-marker-alt"></i> 123 Design Street, Interior City, Gorakhpur</li>
+                        <li><i class="fas fa-phone"></i> +91 98765 43210</li>
+                        <li><i class="fas fa-envelope"></i> info@btkcurators.com</li>
+                        <li><i class="fas fa-clock"></i> Mon-Sat: 10AM - 7PM</li>
+                        <li><i class="fas fa-globe"></i> www.btkcurators.com</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 BTK CURATORS. All Rights Reserved. | Designed with <i class="fas fa-heart" style="color: var(--secondary);"></i></p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const menuBtn = document.querySelector('.mobile-menu-btn');
+            const nav = document.querySelector('nav');
+            const bodyOverlay = document.querySelector('.body-overlay');
+
+            const toggleMenu = () => {
+                nav.classList.toggle('active');
+                bodyOverlay.classList.toggle('active');
+                document.body.classList.toggle('no-scroll');
+                menuBtn.querySelector('i').classList.toggle('fa-bars');
+                menuBtn.querySelector('i').classList.toggle('fa-times');
+            };
+
+            menuBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                toggleMenu();
+            });
+
+            bodyOverlay.addEventListener('click', () => {
+                if (nav.classList.contains('active')) {
+                    toggleMenu();
+                }
+            });
+            
+            document.querySelectorAll('nav ul li a').forEach(link => {
+                link.addEventListener('click', () => {
+                    if (nav.classList.contains('active')) {
+                        toggleMenu();
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
